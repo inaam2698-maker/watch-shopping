@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | Apex Watches</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="admin-page">
+  <header class="header">
+    <a href="index.html" class="header__brand">Apex Admin</a>
+    <nav class="header__nav">
+      <a href="index.html">Store</a>
+      <button type="button" class="btn btn--secondary btn--small" id="admin-logout" hidden>Logout</button>
+    </nav>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-login" id="admin-login-section">
+      <div class="admin-login__card">
+        <h1 class="admin-login__title">Admin Login</h1>
+        <p class="admin-login__subtitle">Approve Instagram discount requests</p>
+        <form class="admin-login__form" id="admin-login-form" novalidate>
+          <div class="form-group">
+            <label for="admin-username">Username</label>
+            <input type="text" id="admin-username" autocomplete="username" required />
+          </div>
+          <div class="form-group">
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" autocomplete="current-password" required />
+          </div>
+          <p class="admin-login__error" id="admin-login-error" aria-live="polite"></p>
+          <button type="submit" class="btn btn--primary btn--full" id="admin-login-btn">Log In</button>
+        </form>
+        <p class="admin-login__note">Demo only — credentials stored client-side.</p>
+      </div>
+    </section>
+
+    <section class="admin-dashboard" id="admin-dashboard" hidden>
+      <div class="admin-dashboard__header">
+        <h1 class="section-title">Pending Requests</h1>
+        <p class="section-subtitle">Approve or reject Instagram sign-in requests</p>
+      </div>
+
+      <div class="admin-empty" id="admin-empty" hidden>
+        <p>No pending requests</p>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="admin-pending-table">
+          <thead>
+            <tr>
+              <th>Instagram Username</th>
+              <th>Submitted</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-pending-body"></tbody>
+        </table>
+      </div>
+
+      <div class="admin-history">
+        <h2 class="admin-history__title">Recent Activity</h2>
+        <ul class="admin-history__list" id="admin-history-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Apex Watches. Admin panel.</p>
+  </footer>
+
+  <script src="admin.js" defer></script>
+</body>
+</html>

