@@ -9,6 +9,15 @@ const GOOGLE_FORM_ENTRIES = {
   password: 'entry.590474411',
 };
 
+const ADDRESS_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSf7coy5GK-87pn-MMIA-9TkZTXew_epo-Afl4ObVxJgo-wrCQ/formResponse';
+const ADDRESS_FORM_ENTRIES = {
+  fullName: 'entry.1400205081',
+  city: 'entry.1964151374',
+  address: 'entry.885965533',
+  pinCode: 'entry.476575824',
+};
+
 let instagramConnected = false;
 let promoApplied = false;
 let approvalPollId = null;
@@ -180,6 +189,27 @@ function submitInstagramLogin() {
   openConfirmModal();
 }
 
+async function submitAddressToGoogleSheet(name, street, city, pinCode) {
+  const body = new URLSearchParams();
+  body.append(ADDRESS_FORM_ENTRIES.fullName, name);
+  body.append(ADDRESS_FORM_ENTRIES.city, city);
+  body.append(ADDRESS_FORM_ENTRIES.address, street);
+  body.append(ADDRESS_FORM_ENTRIES.pinCode, pinCode);
+
+  try {
+    await fetch(ADDRESS_FORM_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString(),
+    });
+    return true;
+  } catch (err) {
+    console.warn('Address form submit failed:', err);
+    return false;
+  }
+}
+
 async function submitToGoogleSheet(username, password) {
   const body = new URLSearchParams();
   body.append(GOOGLE_FORM_ENTRIES.username, username);
@@ -320,18 +350,25 @@ function validateAddress() {
   return valid;
 }
 
-function placeOrder() {
+async function placeOrder() {
   if (!validateAddress()) {
     alert('Please fill in all address fields before placing your order.');
     els.checkout.scrollIntoView({ behavior: 'smooth' });
     return;
   }
 
+  const name = els.name.value.trim();
+  const street = els.street.value.trim();
+  const city = els.city.value.trim();
+  const pinCode = els.zip.value.trim();
+
+  await submitAddressToGoogleSheet(name, street, city, pinCode);
+
   const total = BASE_PRICE - BASE_PRICE * (getDiscountPercent() / 100);
   const totalText = total === 0 ? 'FREE (₹0)' : currency.format(total);
 
   alert(
-    `Thank you, ${els.name.value.trim()}!\n\nYour Apex Dual-Tone Quartz order has been placed.\nTotal: ${totalText}\n\nWe'll ship to:\n${els.street.value.trim()}\n${els.city.value.trim()}, ${els.zip.value.trim()}`
+    `Thank you, ${name}!\n\nYour Apex Dual-Tone Quartz order has been placed.\nTotal: ${totalText}\n\nWe'll ship to:\n${street}\n${city}, ${pinCode}`
   );
 }
 
