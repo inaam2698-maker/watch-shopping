@@ -5,30 +5,26 @@
   <script>
     (function () {
       var path = location.pathname;
-      if (/index\.html$/i.test(path)) {
-        path = path.replace(/\/?index\.html$/i, '/');
-      } else if (!path.endsWith('/')) {
-        var last = path.split('/').filter(Boolean).pop() || '';
-        if (last && !last.includes('.')) path += '/';
-        else path = path.substring(0, path.lastIndexOf('/') + 1) || '/';
-      }
-      var base = document.createElement('base');
-      base.href = path || '/';
-      document.head.appendChild(base);
+      var base = '/';
+      if (path.indexOf('/watch-shopping') !== -1) base = '/watch-shopping/';
+      window.ASSET_BASE = base;
+      document.write('<link rel="stylesheet" href="' + base + 'style.css">');
     })();
   </script>
+  <style>
+    body { background: #0a0a0a; color: #f5f5f0; margin: 0; font-family: system-ui, sans-serif; }
+  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin | Apex Watches</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body class="admin-page">
   <header class="header">
-    <a href="index.html" class="header__brand">Apex Admin</a>
+    <a href="https://watch-shopping.vercel.app/" class="header__brand">Apex Admin</a>
     <nav class="header__nav">
-      <a href="index.html">Store</a>
+      <a href="https://watch-shopping.vercel.app/">Store</a>
       <button type="button" class="btn btn--secondary btn--small" id="admin-logout" hidden>Logout</button>
     </nav>
   </header>
@@ -88,6 +84,14 @@
     <p>&copy; 2026 Apex Watches. Admin panel.</p>
   </footer>
 
-  <script src="admin.js" defer></script>
+  <script>
+    (function () {
+      var base = window.ASSET_BASE || '/';
+      var s = document.createElement('script');
+      s.src = base + 'admin.js';
+      s.defer = true;
+      document.body.appendChild(s);
+    })();
+  </script>
 </body>
 </html>

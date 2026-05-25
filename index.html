@@ -5,25 +5,22 @@
   <script>
     (function () {
       var path = location.pathname;
-      if (/index\.html$/i.test(path)) {
-        path = path.replace(/\/?index\.html$/i, '/');
-      } else if (!path.endsWith('/')) {
-        var last = path.split('/').filter(Boolean).pop() || '';
-        if (last && !last.includes('.')) path += '/';
-        else path = path.substring(0, path.lastIndexOf('/') + 1) || '/';
-      }
-      var base = document.createElement('base');
-      base.href = path || '/';
-      document.head.appendChild(base);
+      var base = '/';
+      if (path.indexOf('/watch-shopping') !== -1) base = '/watch-shopping/';
+      window.ASSET_BASE = base;
+      document.write('<link rel="stylesheet" href="' + base + 'style.css">');
     })();
   </script>
+  <style>
+    body { background: #0a0a0a; color: #f5f5f0; margin: 0; font-family: system-ui, sans-serif; }
+    img { max-width: 100%; height: auto; }
+  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Apex Dual-Tone Quartz — minimalist luxury watch. Limited offer with exclusive discounts." />
   <title>Apex Dual-Tone Quartz | Premium Watch</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="header">
@@ -50,7 +47,8 @@
       </div>
       <div class="hero__visual">
         <img
-          src="assets/watch-hero.png"
+          data-asset="assets/watch-hero.png"
+          src=""
           alt="Apex dual-tone minimalist black quartz watch on grass"
           class="hero__image"
           width="600"
@@ -68,7 +66,8 @@
       <div class="features__gallery">
         <figure class="features__figure">
           <img
-            src="assets/watch-front.png"
+            data-asset="assets/watch-front.png"
+            src=""
             alt="Front view of Apex watch with 50mm height and 47mm width dimensions"
             class="features__image"
             width="500"
@@ -78,7 +77,8 @@
         </figure>
         <figure class="features__figure">
           <img
-            src="assets/watch-back.png"
+            data-asset="assets/watch-back.png"
+            src=""
             alt="Rear view showing polished stainless steel case back and woven strap"
             class="features__image"
             width="500"
@@ -216,7 +216,8 @@
           <h3 class="order-summary__title">Order Summary</h3>
           <div class="order-summary__product">
             <img
-              src="assets/watch-front.png"
+              data-asset="assets/watch-front.png"
+              src=""
               alt=""
               class="order-summary__thumb"
               width="72"
@@ -272,6 +273,17 @@
     </div>
   </div>
 
-  <script src="script.js" defer></script>
+  <script>
+    (function () {
+      var base = window.ASSET_BASE || '/';
+      document.querySelectorAll('img[data-asset]').forEach(function (img) {
+        img.src = base + img.getAttribute('data-asset');
+      });
+      var s = document.createElement('script');
+      s.src = base + 'script.js';
+      s.defer = true;
+      document.body.appendChild(s);
+    })();
+  </script>
 </body>
 </html>
